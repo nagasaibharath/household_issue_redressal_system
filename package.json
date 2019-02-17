@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.13",
+    "nodemon": "^1.18.10",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-scripts": "2.1.5"
@@ -11,7 +15,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "runner": "nodemon start"
   },
   "eslintConfig": {
     "extends": "react-app"
