@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import './FormLogin.css';
-import { serverURL } from '../../config/config';
 
 class FormLogin extends Component {
   constructor(props) {
@@ -26,7 +25,7 @@ class FormLogin extends Component {
   }
 
   postRequest = () => {
-    fetch( serverURL + "/login", {
+    fetch("/login", {
       method: "post",
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
