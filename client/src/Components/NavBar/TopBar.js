@@ -23,7 +23,7 @@ class TopBar extends Component {
 
   render() {
     let loginLink,logoutLink,registerLink;
-    if(this.props.signinStatus == true) {
+    if(this.props.signinStatus === true) {
       logoutLink = <Nav.Link href="#home" onSelect={this.handleLogoutLink} >Logout</Nav.Link>;
     }
     else {
