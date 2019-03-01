@@ -1,0 +1,10 @@
+#feedRoot {
+    margin: 1vw;
+    justify-content: center;
+    padding: 1%;
+    background-color: rgba(24, 24, 24, 0.5)
+}
+
+#issues {
+    color: white;
+}

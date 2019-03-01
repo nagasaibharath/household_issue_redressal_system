@@ -33,10 +33,13 @@ class FormLogin extends Component {
         password: this.state.password,
       })
     })
-    .then(res => console.log(res.json()) );
-    //   .then(user => {
-
-    //   })
+    .then(res => res.json())
+    .then(data => {
+      if(data.validUser === true) {
+        this.props.setSigninStatus(true,this.state.email);
+        this.props.setView("Feed");
+      }
+    })
   }
 
   render() {

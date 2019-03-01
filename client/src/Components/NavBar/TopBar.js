@@ -10,6 +10,7 @@ class TopBar extends Component {
   }
 
   handleLogoutLink = () => {
+    this.props.setSigninStatus(false,"");
     this.props.setView("Home");
   }
 

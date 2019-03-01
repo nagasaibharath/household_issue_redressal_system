@@ -18,8 +18,16 @@ app.get('/',(req,res) => {
 })
 
 app.post('/login',(req,res) => {
-    console.log(req.body);
-    res.json({request: "received!!!"});
+    res.json({
+        validUser: true,
+        isAdmin: false
+    });
+})
+
+app.post('/feed',(req,res) => {
+    res.json({
+        issues: ['issue1','issue2','issue3','issues from '+req.body.email ]
+    });
 })
 
 app.get('*', (req, res) => {

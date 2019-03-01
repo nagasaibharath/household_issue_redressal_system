@@ -8,8 +8,8 @@ class Home extends Component {
         this.state = {
             users: 1,
             organizations: 2,
-            freelancers: 3,
-            issues: 4,
+            freelancers: 5,
+            issues: 7,
             usersEnd: 574,
             organizationsEnd: 27,
             freelancersEnd: 263,
@@ -25,25 +25,25 @@ class Home extends Component {
     
     counter = () => {
         if(this.state.users < this.state.usersEnd) {
-            this.setState({users : this.state.users + 3})
+            this.setState({users : this.state.users + 4})
         }
         if(this.state.organizations < this.state.organizationsEnd) {
             this.setState({organizations : this.state.organizations + 1})
         }
         if(this.state.freelancers < this.state.freelancersEnd) {
-            this.setState({freelancers : this.state.freelancers + 1})
+            this.setState({freelancers : this.state.freelancers + 5})
         }
         if(this.state.issues < this.state.issuesEnd) {
-            this.setState({issues : this.state.issues + 2})
+            this.setState({issues : this.state.issues + 5})
         }
     }
 
     count() {
-        setInterval(()=> { this.counter() }, 60);
+        setInterval(()=> { this.counter() }, 30);
     }
     
     render() {
-        let loginSection = <FormLogin setView={this.props.setView} />
+        let loginSection = <FormLogin setView={this.props.setView} setSigninStatus={this.props.setSigninStatus} />
         let { users,organizations,freelancers,issues } = this.state;
 
         return (
