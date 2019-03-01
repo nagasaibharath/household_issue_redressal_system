@@ -6,12 +6,13 @@ import TopBar from './Components/NavBar/TopBar';
 import Home from './Components/Home/Home';
 import FormLogin from './Components/Login/FormLogin';
 import FormRegister from './Components/Register/FormRegister';
+import Profile from './Components/profiled/ProfilePage';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: "Home",
+      currentView: "Profile",
       signinStatus: false,
     };
   }
@@ -27,6 +28,7 @@ class App extends Component {
       case "Register" : view = <FormRegister />;break;
       case "Login"    : view = <FormLogin setView={this.setView} />;break;
       case "Home"     : view = <Home setView={this.setView} />;break;
+      case "Profile"  : view = <Profile />;break;
       default         : alert("No Page To Load (case:default:App.js)");
     }
 
