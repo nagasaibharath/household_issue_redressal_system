@@ -33,6 +33,10 @@ app.post('/login',(req,res) => {
     }
 })
 
+app.post('/register',(req,res) => {
+    console.log(req.body);
+})
+
 app.post('/feed',(req,res) => {
     res.json({
         issues: ['issue1','issue2','issue3','issues from '+req.body.email ]
