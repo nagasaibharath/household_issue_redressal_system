@@ -1,0 +1,30 @@
+#issuesContainer,
+#usersContainer {
+    margin: 1vw;
+    justify-content: center;
+    padding: 1%;
+    background-color: rgba(24, 24, 24, 0.5);
+    border-radius: 0.5vw;
+}
+
+#issues,
+#users {
+    background-color: whitesmoke;
+    border-radius: 0.5vw;
+    padding: 1vw;
+    transition: all 0.4s;
+}
+
+#issues:hover {
+    background-color: lightblue;
+    transform: scale(1.008);
+}
+
+#users:hover {
+    background-color: lightgreen;
+    transform: scale(1.008);
+}
+
+#containerTitle {
+    color: yellow;
+}

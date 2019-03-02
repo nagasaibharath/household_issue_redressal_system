@@ -1,10 +1,11 @@
 #headerPanel {
     color: greenyellow;
-    background-color: rgba(221, 221, 221, 0.562);
-    border-radius: 2%/30%;
+    background-color: rgba(17, 17, 17, 0.562);
+    border-radius: 0.5vw;
     padding: 1%;
     justify-content: center;
     margin: 1%;
+    box-shadow: 0.5vw 0.5vw 1vw rgb(5, 5, 5);
 }
 
 #infoLoginPanel {
@@ -13,6 +14,7 @@
     padding: 5px;
     justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
 #loginSection,
@@ -25,9 +27,10 @@
     width: 60%;
     height: 25vw;
     padding: 1%;
-    border: 1px dashed grey;
-    border-radius: 5%;
+    /* border: 1px dashed grey; */
+    border-radius: 0.5vw;
     background-color: rgba(17, 17, 17, 0.562);
+    box-shadow: 0.5vw 0.5vw 1.3vw rgb(5, 5, 5);
 }
 
 #statisicsPanel {
@@ -42,10 +45,27 @@
 #organizationsCount,
 #freelancersCount,
 #issuesCount {
-    background-color: rgba(221, 221, 221, 0.562);
-    border-radius: 10%;
+    color: black;
+    border-radius: 1vw;
     padding: 4%;
     margin: 1.5%;
     width: 20%;
     justify-content: center;
+    box-shadow: 0.5vw 0.5vw 1vw rgb(5, 5, 5);
+}
+
+#usersCount {
+    background-color: #e21818;
+}
+
+#organizationsCount {
+    background-color: #6200EA;
+}
+
+#freelancersCount {
+    background-color: #FFD600;
+}
+
+#issuesCount {
+    background-color: #00C853;
 }
