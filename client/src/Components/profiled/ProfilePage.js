@@ -5,6 +5,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './Profile.css';
 import CustPhoto from '../../Assets/images.png';
+import ViewDetails from './ViewDetails';
+//import custDetails from '../../Assets/detailsHtmlPage.html'
 
 class ProfilePage extends Component{
     render()
@@ -32,7 +34,7 @@ class ProfilePage extends Component{
     <Col sm={8}>
       <Tab.Content>
         <Tab.Pane eventKey="first">
-          <h1 style={{color:'red'}}>Your Profile Details</h1>
+         <ViewDetails />
         </Tab.Pane>
         <Tab.Pane eventKey="second">
           <h1 style={{color:'red'}}>Your Posts</h1>
