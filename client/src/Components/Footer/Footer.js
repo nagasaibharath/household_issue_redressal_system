@@ -12,7 +12,7 @@ class Footer extends Component {
     render () {
         return (
             <div id="footerRoot">
-                <p>Back to Top</p>
+                <p>More Comming Soon!!!</p>
             </div>
         );
     }

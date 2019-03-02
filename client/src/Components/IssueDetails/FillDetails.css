@@ -2,12 +2,13 @@
   background-color: rgba(17, 17, 17, 0.562);
   text-align: center;
   color: rgb(255, 141, 96);
-  width: 40vw;
+  width: 50%;
   /* margin: 12% 10%; */
   margin: 5% auto;
-  border: 1px dashed slateblue;
-  border-radius: 5%;
+  /* border: 1px dashed slateblue; */
+  border-radius: 1vw;
   padding: 2vw 3vw;
+  box-shadow: 0.5vw 0.5vw 1vw rgb(5, 5, 5);
 }
 
 #carousel {
@@ -15,6 +16,7 @@
   height: 20vw;
   border: 0.5vw solid blue;
   margin: 1vw auto;
+  border-radius: 2vw;
 }
 
 /* HIDE RADIO */
@@ -27,6 +29,7 @@
 
 /* IMAGE STYLES */
 [type="radio"] + img {
+  border-radius: 2vw;
   cursor: pointer;
   padding: 2mm;
   width: 12vw;
@@ -37,13 +40,13 @@
 
 /* CHECKED STYLES */
 [type="radio"]:checked + img {
-  outline: 2px solid #f00;
+  border: 2px solid #f00;
 }
 
 #textbox {
-  width: 30vw;
+  width: 90%;
   height: 20vw;
-  border: 0.2vw solid maroon;
+  border: 0.15vw solid maroon;
 }
 
 #btnRegister,

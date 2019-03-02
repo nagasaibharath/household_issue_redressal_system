@@ -36,12 +36,12 @@ class FillDetails extends Component {
           </Form.Row>
           <label>
             <input id="hi" type="radio" name="test" value="household" />
-            <img src="https://thumbs.dreamstime.com/b/construction-worker-drilling-hole-wall-new-house-47018944.jpg" />
+            <img alt="Household Issue" src="https://thumbs.dreamstime.com/b/construction-worker-drilling-hole-wall-new-house-47018944.jpg" />
             <p>Household Issue</p>
           </label>
           <label>
             <input id="ci" type="radio" name="test" value="community" />
-            <img src="https://i.cbc.ca/1.4649312.1525464898!/fileImage/httpImage/image.jpg_gen/derivatives/original_780/tree-down.jpg" />
+            <img alt="Community Issue" src="https://i.cbc.ca/1.4649312.1525464898!/fileImage/httpImage/image.jpg_gen/derivatives/original_780/tree-down.jpg" />
             <p>Community Issue</p>
           </label>
           <Form.Row>
@@ -72,8 +72,7 @@ class FillDetails extends Component {
               <Form.Control placeholder="If others please specify" />
             </Form.Group>
           </Form.Row>
-          <textarea id="textbox" name="myTextBox" cols="50" rows="5">
-            Please enter a brief description of your problem.
+          <textarea id="textbox" name="myTextBox" cols="50" rows="5" placeholder="Please enter a brief description of your problem">
           </textarea>
           <Form.Group id="formGridCheckbox">
             <Form.Check

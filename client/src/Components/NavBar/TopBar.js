@@ -9,7 +9,7 @@ class TopBar extends Component {
   };
 
   handleLogoutLink = () => {
-    this.props.setView("Home");
+    this.props.setView("Login");
   };
 
   handleRegisterLink = () => {
@@ -26,7 +26,7 @@ class TopBar extends Component {
 
   render() {
     let loginLink, logoutLink, registerLink;
-    if (this.props.signinStatus == true) {
+    if (this.props.signinStatus) {
       logoutLink = (
         <Nav.Link href="#home" onSelect={this.handleLogoutLink}>
           Logout
@@ -66,24 +66,24 @@ class TopBar extends Component {
             <Nav.Link href="#home" onSelect={this.handleHomeLink}>
               Home
             </Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+            {/* add features and pricing here */}
+            {/* <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="#pricing">Pricing</Nav.Link> */}
+            {(this.props.signinStatus)?<NavDropdown title="Services" id="collasible-nav-dropdown">
               <NavDropdown.Item
                 href="#action/3.1"
-                onSelect={this.handleDetailsLink}
-              >
-                FillDetails
+                onSelect={this.handleDetailsLink}>
+                Submit Issue
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
+              {/* <NavDropdown.Item href="#action/3.2">
                 Another action
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
                 Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
+              </NavDropdown.Item> */}
+            </NavDropdown>:null}
           </Nav>
           <Nav>
             {registerLink}
