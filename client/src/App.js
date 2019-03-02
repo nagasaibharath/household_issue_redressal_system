@@ -6,7 +6,9 @@ import TopBar from './Components/NavBar/TopBar';
 import Home from './Components/Home/Home';
 import Feed from './Components/Feed/Feed';
 import FormLogin from './Components/Login/FormLogin';
+import AdminHome from './Components/Admin/AdminHome';
 import FormRegister from './Components/Register/FormRegister';
+import Footer from './Components/Footer/Footer';
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +20,10 @@ class App extends Component {
     };
   }
 
-  setView = (viewName) => this.setState({ currentView: viewName });
+  setView = (viewName) => {
+    this.setState({ currentView: viewName });
+    this.forceUpdate();
+  }
 
   setSigninStatus = (boolValue,userEmail) => this.setState({ signinStatus: boolValue, email: userEmail });
 
@@ -28,8 +33,9 @@ class App extends Component {
     switch(currentView) {
       case "Register" : view = <FormRegister />;break;
       case "Login"    : view = <FormLogin setView={this.setView} setSigninStatus={this.setSigninStatus} />;break;
-      case "Home"     : view = <Home setView={this.setView} setSigninStatus={this.setSigninStatus} />;break;
+      case "Home"     : view = <Home setView={this.setView} signinStatus={this.state.signinStatus} setSigninStatus={this.setSigninStatus} />;break;
       case "Feed"     : view = <Feed setView={this.setView} email={this.state.email} />;break;
+      case "AdminHome": view = <AdminHome email={this.state.email} />;break;
       default         : alert("No Page To Load (case:default:App.js)");
     }
 
@@ -37,6 +43,7 @@ class App extends Component {
       <div className="App">
         <TopBar setView={this.setView} signinStatus={this.state.signinStatus} setSigninStatus={this.setSigninStatus} />
         {view}
+        <Footer />
       </div>
     );
   }

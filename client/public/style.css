@@ -1,4 +1,4 @@
 body {
-  background: lightblue url("home.jpg") no-repeat fixed center;
-  background-size: cover;
+  background-color: #212121;
+  /* background-size: cover; */
 }

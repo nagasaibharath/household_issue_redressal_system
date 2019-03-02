@@ -21,7 +21,6 @@ class Feed extends Component {
         }).then(res => res.json())
         .then(data => {
             this.setState({ issues: data.issues });
-            console.log(this.state.issues);
         });
     }
 

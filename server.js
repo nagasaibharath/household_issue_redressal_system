@@ -18,16 +18,38 @@ app.get('/',(req,res) => {
 })
 
 app.post('/login',(req,res) => {
-    res.json({
-        validUser: true,
-        isAdmin: false
-    });
+    // console.log(req.body);
+    if(req.body.email === "admin@issueredressal") {
+        res.json({
+            validUser: true,
+            isAdmin: true
+        });
+    }
+    else {
+        res.json({
+            validUser: true,
+            isAdmin: false
+        });
+    }
 })
 
 app.post('/feed',(req,res) => {
     res.json({
         issues: ['issue1','issue2','issue3','issues from '+req.body.email ]
     });
+})
+
+app.post('/admin',(req,res) => {
+    console.log(req.body);
+    if(req.body.email === "admin@issueredressal") {
+        res.json({
+            users: ['user1','user2','user3'],
+            issues: ['issue1','issue2','issue3','issues from '+req.body.email ]
+        });
+    }
+    else {
+        res.json({  });
+    }
 })
 
 app.get('*', (req, res) => {

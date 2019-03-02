@@ -35,7 +35,11 @@ class FormLogin extends Component {
     })
     .then(res => res.json())
     .then(data => {
-      if(data.validUser === true) {
+      if(data.isAdmin) {
+        this.props.setSigninStatus(true,this.state.email);
+        this.props.setView("AdminHome");
+      }
+      else if(data.validUser === true) {
         this.props.setSigninStatus(true,this.state.email);
         this.props.setView("Feed");
       }
