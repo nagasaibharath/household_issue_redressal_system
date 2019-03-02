@@ -9,7 +9,7 @@ import FormLogin from './Components/Login/FormLogin';
 import AdminHome from './Components/Admin/AdminHome';
 import FillDetails from './Components/IssueDetails/FillDetails';
 import FormRegister from './Components/Register/FormRegister';
-import Profile from './Components/profiled/ProfilePage';
+import Profile from './Components/Profile/ProfilePage';
 import Footer from './Components/Footer/Footer';
 
 class App extends Component {
@@ -46,7 +46,7 @@ class App extends Component {
     return (
       <div className="App">
         <TopBar setView={this.setView} signinStatus={this.state.signinStatus} setSigninStatus={this.setSigninStatus} />
-        <div id="view">{view}</div>
+        {view}
         <footer id="footer"><Footer /></footer>
       </div>
     );

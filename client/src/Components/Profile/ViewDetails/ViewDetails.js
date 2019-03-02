@@ -1,9 +1,10 @@
 import React,{Component} from 'react';
+import './ViewDetails.css';
 
 class ViewDetails extends Component{
     render() {
         return(
-            <div>
+            <div id="viewDetailsRoot">
             <h3>Name      : Customer Name</h3>
             <h3>Id        : Customer Id</h3>
             <h3>Address   : Customer Address</h3>

@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './Profile.css';
 import CustPhoto from '../../Assets/images.png';
-import ViewDetails from './ViewDetails';
+import ViewDetails from './ViewDetails/ViewDetails';
 //import custDetails from '../../Assets/detailsHtmlPage.html'
 
 class ProfilePage extends Component{
@@ -27,7 +27,7 @@ class ProfilePage extends Component{
           <Nav.Link eventKey="third">Change Password</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="fourth">Edit Profile1</Nav.Link>
+          <Nav.Link eventKey="fourth">Edit Profile</Nav.Link>
         </Nav.Item>
       </Nav>
     </Col>
@@ -49,7 +49,7 @@ class ProfilePage extends Component{
     </Col>
     <Col id="colid" sm={2}>
         <Tab.Pane eventKey="first">
-        <img id="f1" src={CustPhoto}/>
+        <img id="f1" alt="customer" src={CustPhoto}/>
         <p >This is Photo</p>
         </Tab.Pane>
     </Col>
