@@ -74,8 +74,13 @@ class FormRegister extends Component {
           })
           .then(res => res.json())
           .then(data => {
-            alert("Successfully registered!!!, login to continue.");
-            this.props.setView("Home");
+              if(data.accepted){
+                alert("Successfully registered!!!, login to continue.");
+                this.props.setView("Home");
+              }
+                else
+                alert("User already existing, login to continue.");
+
           })
     }
 
