@@ -24,7 +24,7 @@ class MyPosts extends Component{
         }).then(res => res.json())
         .then(data => {
             // console.log(data);
-            this.setState({ issues: data.issues });
+            this.setState({ issues: data });
         });
     }
 
@@ -36,7 +36,7 @@ class MyPosts extends Component{
             <div id="profileFeedRoot">
                 {issues.map((issue,index) =>
                 <p id="issues" key={index}>
-                    {issue}
+                    {issue.complaintName}
                 </p>
                 )}
             </div>
