@@ -75,6 +75,7 @@ class FormRegister extends Component {
           .then(res => res.json())
           .then(data => {
             alert("Successfully registered!!!, login to continue.");
+            this.props.setView("Home");
           })
     }
 
@@ -117,10 +118,19 @@ class FormRegister extends Component {
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridState">
                     <Form.Label>State</Form.Label>
-                    <Form.Control as="select">
+                    <Form.Control as="select" onChange={this.onStateChange} >
                         <option>Choose...</option>
+                        <option>Andhra Pradesh</option>
+                        <option>Arunachal Pradesh</option>
+                        <option>Assam</option>
+                        <option>Bihar</option>
+                        <option>Chattisgarh</option>
+                        <option>Gujarat</option>
+                        <option>Karnataka</option>
+                        <option>Kerala</option>
                         <option>Rajasthan</option>
-                        <option>...</option>
+                        <option>TamilNadu</option>
+                        <option>Telangana</option>
                     </Form.Control>
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridZip">
@@ -131,7 +141,7 @@ class FormRegister extends Component {
             <Form.Group id="formGridCheckbox">
                 <Form.Check type="checkbox" label="I Agree to the terms and conditions" checked={this.state.iAgree} onChange={this.onChkChange} />
             </Form.Group>
-        <Button variant="primary" type="submit" onClick={this.handleRegister} >Submit</Button>
+            <Button variant="primary" onClick={this.handleRegister} >Submit</Button>
         </Form>
         </div>
       );
