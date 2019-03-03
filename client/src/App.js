@@ -34,7 +34,7 @@ class App extends Component {
     let currentView = this.state.currentView;
     switch(currentView) {
       case "Register" : view = <FormRegister />;break;
-      case "Profile"  : view = <Profile />;break;
+      case "Profile"  : view = <Profile  email={this.state.email}/>;break;
       case "Login"    : view = <FormLogin setView={this.setView} setSigninStatus={this.setSigninStatus} />;break;
       case "Home"     : view = <Home setView={this.setView} signinStatus={this.state.signinStatus} setSigninStatus={this.setSigninStatus} />;break;
       case "Feed"     : view = <Feed setView={this.setView} email={this.state.email} />;break;
