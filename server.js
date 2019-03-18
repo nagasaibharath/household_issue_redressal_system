@@ -158,10 +158,6 @@ app.post('/feed',(req,res) => {
     })
 });
 
-app.post('/password',function(req,res){
-    res.json({password:"test"});
-})
-
 app.post('/admin',(req,res) => {
     console.log(req.body);
     if(req.body.email === "admin@issueredressal") {
