@@ -117,11 +117,11 @@ app.post("/login", (req, res) => {
   }
   else {
     customer.findOne({ email: req.body.email, password: req.body.password }, function (err, data1) {
-      if (data1 === null) {
+      if(data1 === null) {
         freelancer.findOne({ email: req.body.email, password: req.body.password }, function (err, data2) {
-          if (data2 === null) {
+          if(data2 === null) {
             organization.findOne({ email: req.body.email, password: req.body.password }, function (err, data3) {
-              if (data3 === null) {
+              if(data3 === null) {
                 res.json({
                   isCustomer: false,
                   isAdmin: false,
@@ -242,6 +242,16 @@ app.post("/postIssue", function (req, res) {
   newissue.save();
   res.json({});
 });
+
+app.post("/acceptIssue", (req, res) => {
+  issue.findByIdAndUpdate(req.body.id, { status: "Issue taken up by Freelancer" }, (err) => {
+    if (err) {
+      res.json({ errorStatus: true });
+      console.log(err);
+    }
+    else res.json({ errorStatus: false });
+  });
+})
 
 app.post('/feed', (req, res) => {
   issue.find({ email: req.body.email }, function (err, issues) {
