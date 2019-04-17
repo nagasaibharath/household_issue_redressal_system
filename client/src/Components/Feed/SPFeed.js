@@ -10,6 +10,7 @@ class SPFeed extends Component {
         super(props);
         this.state = {
             issues: [],
+            acceptedIssues: [],
             loading: false,
             modalShow: false,
             modalData: {head:"Unavailable", body:"Data Unavailable", issue:"No Data"},
@@ -22,7 +23,9 @@ class SPFeed extends Component {
         fetch('/spfeed', {
             method: "post",
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({})
+            body: JSON.stringify({
+                email: this.props.email
+            })
         })
             .then(res => res.json())
             .then(data => {
@@ -58,10 +61,20 @@ class SPFeed extends Component {
     }
 
     render() {
-        let { issues,loading } = this.state;
+        let { issues, acceptedIssues, loading } = this.state;
+
+        let ai = (
+            <React.Fragment>
+            <h2 id="spFeedHeading">Selected Issues</h2>
+            <div id="spFeedRoot">
+                {acceptedIssues}
+            </div>
+            </React.Fragment>
+        )
 
         return (
             <React.Fragment>
+            {(acceptedIssues.length)?null:ai}
             <h2 id="spFeedHeading">Available Issues</h2>
             <div id="spFeedRoot">
                 {(loading) ? <img className="loadingIcon" src={loadingIcon} alt='Loading...' /> : issues}

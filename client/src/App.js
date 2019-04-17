@@ -69,7 +69,7 @@ class App extends Component {
       case "OmbudsmanHome": view = <OmbudsmanHome email={this.state.email} setView={this.setView} completedIssues={this.state.completedIssues} />; break;
       case "ServiceProviderReg": view = <ServiceProvider setView={this.setView} />; break;
       case "EditIssue": view = (<EditIssue setView={this.setView} data={this.state.storedData} storedData={this.state.storedData} parent={this} />); break;
-      case "SPFeed": view = <SPFeed />; break;
+      case "SPFeed": view = <SPFeed email={this.state.email}/>; break;
       default: view = <ModalAlert show={true} head="Code Error!" body="No page to load. Contact site admin" onHide={null} />;
     }
 
