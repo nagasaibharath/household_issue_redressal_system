@@ -269,6 +269,14 @@ app.post('/feed', (req, res) => {
   })
 });
 
+app.post('/spfeed', (req, res) => {
+  issue.find({ status: "Pending", type: {$ne: "Government"} }, (err, issues) => {
+    res.json({
+      allIss: issues
+    });
+  });
+});
+
 app.post("/editIssue", (req, res) => {
   let editissue = new issue(req.body);
   issue.findByIdAndUpdate(req.body.id, { "$set": { complaintName: editissue.complaintName, email: editissue.email, pay: editissue.pay, type: editissue.type, workNature: editissue.workNature, description: editissue.description, tstart: editissue.tstart, tend: editissue.tend } }, (err) => {
@@ -300,6 +308,28 @@ app.post('/admin', (req, res) => {
               allIss: issues,
               allFreelan: freelancers,
               allOrgs: organizations
+            });
+          });
+        });
+      });
+    });
+  }
+  else {
+    res.json({});
+  }
+});
+
+app.post('/dashboard', (req, res) => {
+  if (req.body.email === "admin@issueredressal") {
+    customer.countDocuments({}, function (err, customers) {
+      issue.countDocuments({}, function (er, issues) {
+        freelancer.countDocuments({}, function (err, freelancers) {
+          organization.countDocuments({}, function (err, organizations) {
+            res.json({
+              noc: customers,
+              noi: issues,
+              nof: freelancers,
+              noo: organizations
             });
           });
         });

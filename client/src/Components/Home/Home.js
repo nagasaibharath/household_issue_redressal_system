@@ -67,19 +67,19 @@ class Home extends Component {
                 <span id="loginSection">{this.state.loginSection}</span>
             </div>
             <div id="statisicsPanel">
-                <span id="usersCount">
+                <span className="homeCard">
                     <h2>{users}</h2>
                     <h3>Users</h3>
                 </span>
-                <span id="organizationsCount">
+                <span className="homeCard">
                     <h2>{organizations}</h2>
                     <h3>Organizations</h3>
                 </span>
-                <span id="freelancersCount">
+                <span className="homeCard">
                     <h2>{freelancers}</h2>
                     <h3>Freelancers</h3>
                 </span>
-                <span id="issuesCount">
+                <span className="homeCard">
                     <h2>{issues}</h2>
                     <h3>Issues</h3>
                 </span>
