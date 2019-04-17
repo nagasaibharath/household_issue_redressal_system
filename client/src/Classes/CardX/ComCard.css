@@ -1,0 +1,9 @@
+#comControls {
+    display: flex;
+    overflow: hidden;
+    text-align: center;
+}
+
+#comment {
+    text-align: left;
+}
