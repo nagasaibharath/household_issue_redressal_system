@@ -5,10 +5,26 @@ class ViewDetails extends Component{
     render() {
         return(
             <div id="viewDetailsRoot">
-            <h3>Name      : Customer Name</h3>
-            <h3>Address   : Customer Address</h3>
-            <h3>Age       : Customer Age</h3>
-            <h3>Mobile No : Phone no</h3>
+                <table id="abcd">
+                <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td>{this.props.user.fname}</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td>Customer Address</td>
+                    </tr>
+                    <tr>
+                        <td>Age</td>
+                        <td>Customer Age</td>
+                    </tr>
+                    <tr>
+                        <td>Phone no</td>
+                        <td>Customer Phone no</td>
+                    </tr>
+                </tbody>
+                </table>
             </div>
         );
     }

@@ -14,17 +14,17 @@ class ChangePassword extends Component{
 
     componentDidMount() {
         //fetch issue details from backend
-        fetch('/password', {
-            method: "post",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email: this.state.email
-            })
-        }).then(res => res.json())
-        .then(data => {
-            this.setState({ passW: data.password });
-            console.log(data.password)
-        });
+        // fetch('/password', {
+        //     method: "post",
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({
+        //         email: this.state.email
+        //     })
+        // }).then(res => res.json())
+        // .then(data => {
+        //     this.setState({ passW: data.password });
+        //     console.log(data.password)
+        // });
     }
 
     render()

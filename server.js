@@ -134,7 +134,8 @@ app.post("/login", (req, res) => {
                 res.json({
                   isCustomer: false,
                   isAdmin: false,
-                  isSP: true
+                  isSP: true,
+                  user: data3,
                 });
               }
             })
@@ -143,7 +144,8 @@ app.post("/login", (req, res) => {
             res.json({
               isCustomer: false,
               isAdmin: false,
-              isSP: true
+              isSP: true,
+              user: data2,
             });
           }
         })
@@ -152,7 +154,8 @@ app.post("/login", (req, res) => {
         res.json({
           isCustomer: true,
           isAdmin: false,
-          isSP: false
+          isSP: false,
+          user: data1,
         });
       }
     });

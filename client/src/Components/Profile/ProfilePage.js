@@ -43,10 +43,11 @@ class ProfilePage extends Component{
         </Nav.Item>
       </Nav>
     </Col>
+    <div className="vr" xs="true"></div>
     <Col sm={8}>
       <Tab.Content>
         <Tab.Pane eventKey="first">
-         <ViewDetails />
+         <ViewDetails user={this.props.user} />
         </Tab.Pane>
         <Tab.Pane eventKey="second">
           <h1 style={{color:'red'}}>Your Posts</h1>
@@ -62,7 +63,7 @@ class ProfilePage extends Component{
         </Tab.Pane>
       </Tab.Content>
     </Col>
-    <Col id="colid" sm={2}>
+    <Col id="colid" sm={1}>
         <Tab.Pane eventKey="first">
           <img id="f1" alt="customer" src={CustPhoto}/>
           <p >This is Photo</p>

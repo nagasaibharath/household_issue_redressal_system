@@ -22,7 +22,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.count();
-    this.setState({ loginSection: (this.props.signinStatus)?null:<FormLogin setView={this.props.setView} setSigninStatus={this.props.setSigninStatus} setAdmin={this.props.setAdmin} setOmbudsman={this.props.setOmbudsman} setCustomer={this.props.setCustomer} /> });
+    this.setState({ loginSection: (this.props.signinStatus)?null:<FormLogin setUser={this.props.setUser} setView={this.props.setView} setSigninStatus={this.props.setSigninStatus} setAdmin={this.props.setAdmin} setOmbudsman={this.props.setOmbudsman} setCustomer={this.props.setCustomer} /> });
   }
 
   counter = () => {

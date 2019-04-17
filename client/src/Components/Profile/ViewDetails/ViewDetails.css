@@ -1,3 +1,11 @@
 #viewDetailsRoot {
     color: red;
+    /* text-align: center; */
+   
+}
+#viewDetailsRoot #abcd{
+    margin-left:50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    text-align: left;
 }
