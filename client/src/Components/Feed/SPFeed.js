@@ -19,20 +19,19 @@ class SPFeed extends Component {
     componentDidMount() {
         //fetch issue details from backend
         this.setState({ loading: true });
-        fetch('/admin', {
+        fetch('/spfeed', {
             method: "post",
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email: "admin@issueredressal",
-            })
-        }).then(res => res.json())
-        .then(data => {
-            this.setState({
-                issues: data.allIss.map((issue, index) => { return <div className="cardWrapper" key={index}><SPCard header={issue.complaintName} content={new Issue(issue)} parent={this} key={index} myIssues={true} /></div>; }),
+            body: JSON.stringify({})
+        })
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    issues: data.allIss.map((issue, index) => { return <div className="cardWrapper" key={index}><SPCard header={issue.complaintName} content={new Issue(issue)} parent={this} key={index} myIssues={true} /></div>; }),
+                });
+            }).then( () => {
+                this.setState({ loading:false });
             });
-        }).then( () => {
-            this.setState({ loading:false });
-        });
     }
 
     handleClose = () => {this.setState({ modalShow: false });}

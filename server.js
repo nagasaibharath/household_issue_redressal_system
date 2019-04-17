@@ -266,6 +266,14 @@ app.post('/feed', (req, res) => {
   })
 });
 
+app.post('/spfeed', (req, res) => {
+  issue.find({ status: "Pending", type: {$ne: "Government"} }, (err, issues) => {
+    res.json({
+      allIss: issues
+    });
+  });
+});
+
 app.post("/editIssue", (req, res) => {
   let editissue = new issue(req.body);
   issue.findByIdAndUpdate(req.body.id, { "$set": { complaintName: editissue.complaintName, email: editissue.email, pay: editissue.pay, type: editissue.type, workNature: editissue.workNature, description: editissue.description, tstart: editissue.tstart, tend: editissue.tend } }, (err) => {
