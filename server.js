@@ -308,6 +308,28 @@ app.post('/admin', (req, res) => {
   }
 });
 
+app.post('/dashboard', (req, res) => {
+  if (req.body.email === "admin@issueredressal") {
+    customer.countDocuments({}, function (err, customers) {
+      issue.countDocuments({}, function (er, issues) {
+        freelancer.countDocuments({}, function (err, freelancers) {
+          organization.countDocuments({}, function (err, organizations) {
+            res.json({
+              noc: customers,
+              noi: issues,
+              nof: freelancers,
+              noo: organizations
+            });
+          });
+        });
+      });
+    });
+  }
+  else {
+    res.json({});
+  }
+});
+
 app.post("/adminDelete", (req, res) => {
   switch (req.body.documentName) {
     case "Issue":

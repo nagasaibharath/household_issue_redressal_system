@@ -81,6 +81,7 @@ class AdminHome extends Component {
   };
 
   refershHandler = () => this.componentDidMount();
+  dashboardHandler = () => { this.props.setView("Dashboard"); }
 
   searchinput = async (input) => {
     let { issues, users, freelancers, organizations } = this.state;
@@ -135,6 +136,7 @@ class AdminHome extends Component {
                   <h2>Controls</h2><hr />
                   <div className="controls"><div className="control small" onClick={this.refershHandler}><img className="action" src={restartIcon} alt="Reload" />Reload Data</div></div>
                   <FormControl className="searchbar" type="text" placeholder="Search" onChange={this.searchinput} />
+                  <a href="#dashboard" onClick={this.dashboardHandler} style={{margin: "0.5em"}} >Go to dashboard</a>
                 </div>
               </Col>
               <div className="vr" xs="true"></div>
