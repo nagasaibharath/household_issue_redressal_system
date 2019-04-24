@@ -405,6 +405,17 @@ app.post('/ombudTrack', (req, res) => {
   });
 })
 
+app.post('/passwordUpdate',(req,res) => {
+  console.log(req.body);
+  customer.findOneAndUpdate({email : req.body.email},{password : req.body.password},(err,data) => {
+    if(err) {
+      res.json({errorStatus : true});
+      console.log(err);
+    }
+    else res.json({errorStatus : false});
+  })
+})
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });

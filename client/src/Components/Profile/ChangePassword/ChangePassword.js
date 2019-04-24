@@ -1,13 +1,19 @@
 import React,{Component} from 'react';
-import './ChangePassword.css'
+import './ChangePassword.css';
+import FormGroup from 'react-bootstrap/FormGroup';
+import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
+import ControlLabel from 'react-bootstrap/FormControl';
+import Form from 'react-bootstrap/Form';
 
 class ChangePassword extends Component{
 
     constructor(props){
         super(props);
         this.state={
-            email:this.props.email,
-            passW:"null",
+            password: "",
+            oldPassword: "",
+            confirmPassword: ""
         }
     }
     
@@ -27,17 +33,71 @@ class ChangePassword extends Component{
         // });
     }
 
+    validateCurrPw() {
+        if(this.props.user.password === this.state.oldPassword)
+          return true
+        else
+          return false
+    }
+
+    validateNewPw() {
+        if(this.state.password===this.state.confirmPassword)
+            return true 
+        else
+            return false
+
+    }
+
+      updatePassword = () => {
+          if(this.validateCurrPw()===true)
+          {
+              if(this.validateNewPw()===true)
+              {  console.log(this.props.user.email);
+                fetch("/passwordUpdate", {
+                    method: "post",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        'email': this.props.user.email,
+                        'password': this.state.confirmPassword
+                    })
+                })
+                 .then(res => res.json())
+                 .then(data => {
+                    
+                 }).catch((err)=>{alert(err)});
+                alert("Successfully updated");
+              }
+              else
+              {
+                  alert("New Password and Confirmed Password are not matching");
+              }
+          }
+          else
+          {
+              alert("Current Password is wrong");
+          }
+      }
+
     render()
     {
         return(
-            <div>
-                <p id="oldPW">
-                    Current Password : {this.state.passW}
-                </p>
-                <p id="NewPW">New Password</p><input type="text" /><br/>
-                <p id="ConfirmPW">Confirm Password</p><input type="text"  /><br/>
-                <input type="submit"/>
-            </div>
+        <div>
+            <Form>
+            <Form.Group controlId="oldPassword">
+                <Form.Label className="labelPw">Current Password</Form.Label>
+                <Form.Control className="chgPwEle" type="password" onChange={(input) => this.setState({oldPassword : input.target.value})} />
+            </Form.Group>
+            <Form.Group controlId="newPassword">
+                <Form.Label className="labelPw">New Password</Form.Label>
+                <Form.Control className="chgPwEle" type="password" onChange={(input) => this.setState({password : input.target.value})}/>
+            </Form.Group>
+            <Form.Group controlId="confirmPassword">
+                <Form.Label className="labelPw">Confirm Password</Form.Label>
+                <Form.Control className="chgPwEle" type="password"  onChange={(input) => this.setState({confirmPassword : input.target.value})}/>
+            </Form.Group>
+            <Button as="input" type="submit" value="Change Password" onClick={this.updatePassword}/>
+            </Form>
+        </div>
         );
     }
 }
