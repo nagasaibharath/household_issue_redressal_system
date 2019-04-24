@@ -30,6 +30,7 @@ class App extends Component {
       isCustomer: false,
       completedIssues: false,
       email: "",
+      user: null,
       storedData: null
     };
   }
@@ -42,6 +43,10 @@ class App extends Component {
   storeData = data => {
     this.setState({ storedData: data });
   };
+
+  setUser = (data) => {
+    this.setState({ user: data });
+  }
 
   setSigninStatus = (boolValue, userEmail) => {
     if (boolValue === false) {
@@ -59,9 +64,9 @@ class App extends Component {
     let currentView = this.state.currentView;
     switch (currentView) {
       case "Register": view = <FormRegister setView={this.setView} />; break;
-      case "Profile": view = <Profile email={this.state.email} />; break;
-      case "Login": view = <FormLogin setView={this.setView} setSigninStatus={this.setSigninStatus} setAdmin={this.setAdmin} setOmbudsman={this.setOmbudsman} setCustomer={this.setCustomer} />; break;
-      case "Home": view = <Home setView={this.setView} signinStatus={this.state.signinStatus} setSigninStatus={this.setSigninStatus} setAdmin={this.setAdmin} setOmbudsman={this.setOmbudsman} setCustomer={this.setCustomer} />; break;
+      case "Profile": view = <Profile user={this.state.user} />; break;
+      case "Login": view = <FormLogin setUser={this.setUser} setView={this.setView} setSigninStatus={this.setSigninStatus} setAdmin={this.setAdmin} setOmbudsman={this.setOmbudsman} setCustomer={this.setCustomer} />; break;
+      case "Home": view = <Home setUser={this.setUser} setView={this.setView} signinStatus={this.state.signinStatus} setSigninStatus={this.setSigninStatus} setAdmin={this.setAdmin} setOmbudsman={this.setOmbudsman} setCustomer={this.setCustomer} />; break;
       case "Feed": view = <Feed setView={this.setView} email={this.state.email} storeData={this.storeData} />; break;
       case "PostIssue": view = <PostIssue email={this.state.email} setView={this.setView} />; break;
       case "AdminHome": view = <AdminHome setView={this.setView} email={this.state.email} />; break;

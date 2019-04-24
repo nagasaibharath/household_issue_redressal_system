@@ -8,11 +8,11 @@ class MyPosts extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            email: this.props.email,
+            email: this.props.user.email,
             issues: []
         }
-        // console.log("abcd");
-        // console.log(this.props.email);
+         console.log("abcd");
+         console.log(this.props.user.email);
     }
 
     componentDidMount() {
@@ -32,7 +32,7 @@ class MyPosts extends Component{
             method: "post",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              email: this.props.email
+              email: this.props.user.email
             })
           }).then(res => res.json())
             .then(data => {

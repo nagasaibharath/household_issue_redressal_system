@@ -144,7 +144,8 @@ app.post("/login", (req, res) => {
                 res.json({
                   isCustomer: false,
                   isAdmin: false,
-                  isSP: true
+                  isSP: true,
+                  user: data3,
                 });
               }
             })
@@ -153,7 +154,8 @@ app.post("/login", (req, res) => {
             res.json({
               isCustomer: false,
               isAdmin: false,
-              isSP: true
+              isSP: true,
+              user: data2,
             });
           }
         })
@@ -162,7 +164,8 @@ app.post("/login", (req, res) => {
         res.json({
           isCustomer: true,
           isAdmin: false,
-          isSP: false
+          isSP: false,
+          user: data1,
         });
       }
     });
@@ -425,6 +428,17 @@ app.post('/ombudTrack', (req, res) => {
     }
     else res.json({ errorStatus: false });
   });
+})
+
+app.post('/passwordUpdate',(req,res) => {
+  console.log(req.body);
+  customer.findOneAndUpdate({email : req.body.email},{password : req.body.password},(err,data) => {
+    if(err) {
+      res.json({errorStatus : true});
+      console.log(err);
+    }
+    else res.json({errorStatus : false});
+  })
 })
 
 app.get('*', (req, res) => {

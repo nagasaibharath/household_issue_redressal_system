@@ -43,29 +43,30 @@ class ProfilePage extends Component{
         </Nav.Item>
       </Nav>
     </Col>
+    <div className="vr" xs="true"></div>
     <Col sm={8}>
       <Tab.Content>
         <Tab.Pane eventKey="first">
-         <ViewDetails />
+         <ViewDetails user={this.props.user} />
         </Tab.Pane>
         <Tab.Pane eventKey="second">
-          <h1 style={{color:'red'}}>Your Posts</h1>
-          <MyPosts id="posts" email={this.state.email} />
+          <h1 >My Posts</h1>
+          <MyPosts id="posts"  user={this.props.user}/>
         </Tab.Pane>
         <Tab.Pane eventKey="third">
           <h1 style={{color:'red'}}>Change Your Password</h1>
-          <ChangePassword id="chgPsW" email={this.state.email} />
+          <ChangePassword id="chgPsW" user={this.props.user} />
         </Tab.Pane>
         <Tab.Pane eventKey="fourth">
           <h1 style={{color:'red'}}>Change Your Profile</h1>
-          <EditProfile email={this.state.email}/>
+          <EditProfile user={this.props.user}/>
         </Tab.Pane>
       </Tab.Content>
     </Col>
-    <Col id="colid" sm={2}>
+    <Col id="colid" sm={1}>
         <Tab.Pane eventKey="first">
-          <img id="f1" alt="customer" src={CustPhoto}/>
-          <p >This is Photo</p>
+        <img className="profile-image" src={"https://api.adorable.io/avatars/112/"+this.props.user.email+".png"} alt="Account" />
+          {/* <p >This is Photo</p> */}
         </Tab.Pane>
     </Col>
    

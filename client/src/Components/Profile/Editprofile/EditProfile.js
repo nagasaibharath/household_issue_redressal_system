@@ -5,6 +5,23 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 
 class EditProfile extends Component{
+    constructor(props){
+        super(props);
+
+        this.state={
+            fname: this.props.user.fname,
+            lname: this.props.user.lname,
+            email: this.props.user.email,
+            password: this.props.user.password,
+            address: this.props.user.address,
+            community: this.props.user.community,
+            city: this.props.user.city,
+            state: this.props.user.state,
+            pincode: this.props.user.pincode,
+            mobile: this.props.user.mobile,
+            aadhaar: this.props.user.aadhaar
+        }
+    }
     render()
     {
         return (
@@ -13,35 +30,25 @@ class EditProfile extends Component{
             <Form.Row>
                 <Form.Group as={Col} controlId="formGridFName">
                     <Form.Label>First Name</Form.Label>
-                    <Form.Control type="text" placeholder="First Name" />
+                    <Form.Control type="text" value={this.state.fname} onChange={(input) => this.setState({fname : input.target.value})} required/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridLName">
                     <Form.Label>Last Name</Form.Label>
-                    <Form.Control type="text" placeholder="Last Name" />
-                </Form.Group>
-            </Form.Row>
-            <Form.Row>
-                <Form.Group as={Col} controlId="formGridEmail">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" placeholder="email@example.com" />
-                </Form.Group>
-                <Form.Group as={Col} controlId="formGridPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control type="text" value={this.state.lname} onChange={(input) => this.setState({lname : input.target.value})} />
                 </Form.Group>
             </Form.Row>
             <Form.Group controlId="formGridAddress1">
                 <Form.Label>Address 1</Form.Label>
-                <Form.Control placeholder="1234 Main St" />
+                <Form.Control value={this.state.address} onChange={(input) => this.setState({address : input.target.value})} />
             </Form.Group>
             <Form.Group controlId="formGridAddress2">
-                <Form.Label>Address 2</Form.Label>
-                <Form.Control placeholder="Apartment, studio, or floor" />
+                <Form.Label>Community</Form.Label>
+                <Form.Control value={this.state.community} onChange={(input) => this.setState({community : input.target.value})} />
             </Form.Group>
             <Form.Row>
                 <Form.Group as={Col} controlId="formGridCity">
                     <Form.Label>City</Form.Label>
-                    <Form.Control />
+                    <Form.Control value={this.state.city} onChange={(input) => this.setState({city : input.target.value})}/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridState">
                     <Form.Label>State</Form.Label>
@@ -53,7 +60,7 @@ class EditProfile extends Component{
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridZip">
                     <Form.Label>Pin Code</Form.Label>
-                    <Form.Control />
+                    <Form.Control value={this.state.pincode} onChange={(input) => this.setState({pincode : input.target.value})}/>
                 </Form.Group>
             </Form.Row>
         <Button variant="primary" type="submit">Submit</Button>
