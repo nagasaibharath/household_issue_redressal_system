@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import CardXFeed from '../../../Classes/CardX/CardXFeed';
 import Issue from '../../../Classes/Issue';
 import './MyPosts.css';
+import loadingIcon from '../../../Assets/loading.gif';
 
 class MyPosts extends Component{    
 
@@ -9,26 +10,16 @@ class MyPosts extends Component{
         super(props);
         this.state = {
             email: this.props.user.email,
-            issues: []
+            issues: [],
+            loading:false
         }
          console.log("abcd");
          console.log(this.props.user.email);
     }
 
     componentDidMount() {
-        //fetch issue details from backend
-        // fetch('/feed', {
-        //     method: "post",
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({
-        //         email: this.state.email
-        //     })
-        // }).then(res => res.json())
-        // .then(data => {
-        //     // console.log(data);
-        //     this.setState({ issues: data });
-        // });
-        fetch('/feed', {
+      this.setState({loading : true});
+        fetch('/myPosts', {
             method: "post",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -37,7 +28,7 @@ class MyPosts extends Component{
           }).then(res => res.json())
             .then(data => {
               this.setState({
-                issues: data.myIssues.map((issue, index) => { return <CardXFeed header={issue.complaintName} content={new Issue(issue)} parent={this} key={index} myIssues={true} setView={this.props.setView} storeData={this.props.storeData} />; }),
+                issues: data.myIssues.map((issue, index) => { return <CardXFeed header={issue.complaintName} profile={true} content={new Issue(issue)} parent={this} key={index} myIssues={true} setView={this.props.setView} storeData={this.props.storeData} />; }),
               });
             }).then(() => {
               this.setState({ loading: false });
@@ -47,10 +38,10 @@ class MyPosts extends Component{
 
     render()
     {
-        let {issues} = this.state;
+        let {issues , loading} = this.state;
         return (
             <div id="profileFeedRoot">
-                {issues}
+              {(loading) ? <img className="loadingIcon" src={loadingIcon} alt='Loading...' /> : issues}
             </div>
         );
     }
