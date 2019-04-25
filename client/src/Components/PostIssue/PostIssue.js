@@ -124,6 +124,7 @@ class PostIssue extends Component {
         type: this.state.type,
         tstart: this.state.tstart,
         tend: this.state.tend,
+        pincode: this.props.user.pincode,
         status: "Pending"
       })
     })
@@ -135,8 +136,8 @@ class PostIssue extends Component {
       .then(res => {console.log(res); return res.json()})
       .then(data => {
         this.setState({ showModal: true });
-      }))
-      .catch(error => alert(error));
+      })
+      .catch(error => window.alert(error));
     // console.log("Posting issue using axios");
     // axios.post("/postIssue", {
     //   email: this.props.email,
