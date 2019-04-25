@@ -56,7 +56,7 @@ var issueSchema = new mongo.Schema({
   status: String,
   acceptedBy: String,
   pincode: Number,
-  comments:[{
+  comments: [{
     name: String,
     message: String,
     time: String
@@ -350,8 +350,8 @@ app.post("/acceptIssue", (req, res) => {
 })
 
 app.post('/feed', (req, res) => {
-  issue.find({ email: req.body.email, status: {$ne: "Completed"} }, function (err, issues) {
-    issue.find({ type: "Community", status: {$ne: "Completed"} }, function (err, communityIssues) {
+  issue.find({ email: req.body.email, status: { $ne: "Completed" } }, function (err, issues) {
+    issue.find({ type: "Community", status: { $ne: "Completed" } }, function (err, communityIssues) {
       res.send({
         myIssues: issues,
         comIssues: communityIssues
@@ -412,6 +412,30 @@ app.post('/admin', (req, res) => {
     res.json({});
   }
 });
+
+
+app.post('/dashboard3', (req, res) => {
+  issue.count({ tstart: { $gt: new Date(req.body.date2), $lte: new Date(req.body.date1) } }, function (err, data1) {
+    issue.count({ tend: { $gt: new Date(req.body.date2), $lte: new Date(req.body.date1) } }, function (err, data2) {
+      freelancer.count({ tstart: { $gt: new Date(req.body.date2), $lte: new Date(req.body.date1) } }, function (err, data3) {
+        customer.count({ tstart: { $gt: new Date(req.body.date2), $lte: new Date(req.body.date1) } }, function (err, data4) {
+          organization.count({ tstart: { $gt: new Date(req.body.date2), $lte: new Date(req.body.date1) } }, function (err, data5) {
+            rating.count({ tstart: { $gt: new Date(req.body.date2), $lte: new Date(req.body.date1) } }, function (err, data6) {
+              res.json({
+                num1: data1,
+                num2: data2,
+                num3: data3,
+                num4: data4,
+                num5: data5,
+                num6: data6
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+})
 
 app.post('/dashboard', (req, res) => {
   if (req.body.email === "admin@issueredressal") {
@@ -499,14 +523,26 @@ app.post('/ombudTrack', (req, res) => {
   });
 })
 
-app.post('/passwordUpdate',(req,res) => {
-  console.log(req.body);
-  customer.findOneAndUpdate({email : req.body.email},{password : req.body.password},(err,data) => {
-    if(err) {
-      res.json({errorStatus : true});
+
+
+app.post('/ombudTrack', (req, res) => {
+  issue.findByIdAndUpdate(req.body.id, { status: req.body.newStatus }, (err) => {
+    if (err) {
+      res.json({ errorStatus: true });
       console.log(err);
     }
-    else res.json({errorStatus : false});
+    else res.json({ errorStatus: false });
+  });
+})
+
+app.post('/passwordUpdate', (req, res) => {
+  console.log(req.body);
+  customer.findOneAndUpdate({ email: req.body.email }, { password: req.body.password }, (err, data) => {
+    if (err) {
+      res.json({ errorStatus: true });
+      console.log(err);
+    }
+    else res.json({ errorStatus: false });
   })
 })
 
@@ -515,4 +551,4 @@ app.get('*', (req, res) => {
 });
 app.listen(port, () => {
   console.log(`server running on : "http://localhost:${port}"`);
-});
+})
