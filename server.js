@@ -6,6 +6,7 @@ const cors = require("cors");
 const mongo = require("mongoose");
 const app = express();
 const port = process.env.PORT || 5000;
+const multer = require("multer");
 
 const sitelog = (message) => {
   var datetime = new Date(Date.now() + 5.5);
@@ -49,6 +50,7 @@ var issueSchema = new mongo.Schema({
   type: String,
   workNature: String,
   description: String,
+  imageURL:String,
   tstart: Date,
   tend: Date,
   status: String,
@@ -69,6 +71,7 @@ var freelancerSchema = new mongo.Schema({
   password: String,
   address: String,
   city: String,
+  department: String,
   state: String,
   mobile: Number,
   aadhaar: Number,
@@ -322,6 +325,20 @@ app.post("/postIssue", function (req, res) {
   res.json({});
 });
 
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+   cb(null, path.join(__dirname+'/uploads/'))
+   },
+   filename: function (req, file, cb) {
+    cb(null,file.originalname);
+   }
+})
+var upload = multer({storage: storage});
+
+app.post("/uploadImage",upload.single("image"),function(req,res){
+  res.json({});
+});
+
 app.post("/acceptIssue", (req, res) => {
   issue.findByIdAndUpdate(req.body.id, { status: "Issue taken up", acceptedBy: req.body.email }, (err) => {
     if (err) {
@@ -496,7 +513,6 @@ app.post('/passwordUpdate',(req,res) => {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
-
 app.listen(port, () => {
   console.log(`server running on : "http://localhost:${port}"`);
 });
