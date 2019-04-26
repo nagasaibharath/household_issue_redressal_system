@@ -51,7 +51,7 @@ var issueSchema = new mongo.Schema({
   type: String,
   workNature: String,
   description: String,
-  imageURL:String,
+  imageURL: String,
   tstart: Date,
   tend: Date,
   status: String,
@@ -331,15 +331,15 @@ app.post("/postIssue", function (req, res) {
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-   cb(null, path.join(__dirname+'/uploads/'))
-   },
-   filename: function (req, file, cb) {
-    cb(null,file.originalname);
-   }
+    cb(null, path.join(__dirname + '/uploads/'))
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
 })
-var upload = multer({storage: storage});
+var upload = multer({ storage: storage });
 
-app.post("/uploadImage",upload.single("image"),function(req,res){
+app.post("/uploadImage", upload.single("image"), function (req, res) {
   res.json({});
 });
 
@@ -431,7 +431,7 @@ app.post('/dashboard3', (req, res) => {
                 num3: data3,
                 num4: data4,
                 num5: data5,
-                num6: data6
+                num6: data6,
               });
             });
           });
@@ -447,11 +447,21 @@ app.post('/dashboard', (req, res) => {
       issue.countDocuments({}, function (er, issues) {
         freelancer.countDocuments({}, function (err, freelancers) {
           organization.countDocuments({}, function (err, organizations) {
-            res.json({
-              noc: customers,
-              noi: issues,
-              nof: freelancers,
-              noo: organizations
+            issue.count({ type: "Government", status: "Pending" }, function (err, data7) {
+              issue.count({ type: "Government", status: "In Progress" }, function (err, data8) {
+                issue.count({ type: "Government", status: "Completed" }, function (err, data9) {
+                  //console.log(data7, data8, data9);
+                  res.json({
+                    noc: customers,
+                    noi: issues,
+                    nof: freelancers,
+                    noo: organizations,
+                    num7: data7,
+                    num8: data8,
+                    num9: data9
+                  });
+                });
+              });
             });
           });
         });
@@ -525,10 +535,10 @@ app.post('/ombudTrack', (req, res) => {
   });
 })
 
-app.post('/passwordUpdate',(req, res) => {
-  customer.findOneAndUpdate({email : req.body.email},{password : req.body.password},(err, data) => {
+app.post('/passwordUpdate', (req, res) => {
+  customer.findOneAndUpdate({ email: req.body.email }, { password: req.body.password }, (err, data) => {
     if (err) {
-      res.json({errorStatus : true});
+      res.json({ errorStatus: true });
       console.log(err);
     }
     else res.json({ errorStatus: false });
