@@ -6,6 +6,7 @@ const cors = require("cors");
 const mongo = require("mongoose");
 const app = express();
 const port = process.env.PORT || 5000;
+const multer = require("multer");
 
 const sitelog = (message) => {
   var datetime = new Date(Date.now() + 5.5);
@@ -38,7 +39,8 @@ var cusSchema = new mongo.Schema({
   state: String,
   pincode: Number,
   mobile: Number,
-  aadhaar: Number
+  aadhaar: Number,
+  tstart: Date
 });
 var customer = mongo.model('customer', cusSchema);
 
@@ -49,12 +51,13 @@ var issueSchema = new mongo.Schema({
   type: String,
   workNature: String,
   description: String,
+  imageURL:String,
   tstart: Date,
   tend: Date,
   status: String,
   acceptedBy: String,
   pincode: Number,
-  comments:[{
+  comments: [{
     name: String,
     message: String,
     time: String
@@ -69,13 +72,15 @@ var freelancerSchema = new mongo.Schema({
   password: String,
   address: String,
   city: String,
+  department: String,
   state: String,
   mobile: Number,
   aadhaar: Number,
   pincode: Number,
   noOfIssues: Number,
   rating: Number,
-  skills: [String]
+  skills: [String],
+  tstart: Date
 });
 var freelancer = new mongo.model('freelancer', freelancerSchema);
 
@@ -86,7 +91,8 @@ var organizationSchema = new mongo.Schema({
   headquaters: String,
   mobile: Number,
   workforce: Number,
-  skills: [String]
+  skills: [String],
+  tstart: Date
 });
 var organization = new mongo.model('organization', organizationSchema);
 
@@ -102,7 +108,8 @@ var ratingSchema = new mongo.Schema({
   cusemail: String,
   SPemail: String,
   rating: Number,
-  review: String
+  review: String,
+  tstart: Date
 });
 var rating = new mongo.model('rating', ratingSchema);
 
@@ -227,9 +234,6 @@ app.post("/rating", (req, res) => {
   rating.findOne({ issueid: req.body.issueid }, function (err, data) {
     if (data == null) {
       newrating.save();
-      res.json({
-        accepted: true
-      });
     } else {
       rating.findByIdAndUpdate(data._id, { "$set": { rating: req.body.rating, review: req.body.review } }, err => {
         // if (err) res.json({ errorStatus: true });
@@ -239,13 +243,16 @@ app.post("/rating", (req, res) => {
   });
   freelancer.findOne({ email: req.body.SPemail }, function (erro, datas) {
     freelancer.findByIdAndUpdate(datas._id, { "$set": { rating: ((datas.rating * datas.noOfIssues) + req.body.rating) / (datas.noOfIssues + 1), noOfIssues: datas.noOfIssues + 1 } }, err => {
-      // if (erro || err) res.json({ errorStatus: true });
+      if (err) console.log(err);
       // else res.json({ errorStatus: false });
     });
   });
-  issue.findByIdAndUpdate(req.body.issueid, { "$set": { status: "Completed" } }, err => {
+  issue.findByIdAndUpdate(req.body.issueid, { "$set": { status: "Completed", tend: req.body.tend } }, err => {
     // if (erro || err) res.json({ errorStatus: true });
     // else res.json({ errorStatus: false });
+    res.json({
+      accepted: true
+    });
   });
 })
 
@@ -322,6 +329,20 @@ app.post("/postIssue", function (req, res) {
   res.json({});
 });
 
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+   cb(null, path.join(__dirname+'/uploads/'))
+   },
+   filename: function (req, file, cb) {
+    cb(null,file.originalname);
+   }
+})
+var upload = multer({storage: storage});
+
+app.post("/uploadImage",upload.single("image"),function(req,res){
+  res.json({});
+});
+
 app.post("/acceptIssue", (req, res) => {
   issue.findByIdAndUpdate(req.body.id, { status: "Issue taken up", acceptedBy: req.body.email }, (err) => {
     if (err) {
@@ -333,8 +354,8 @@ app.post("/acceptIssue", (req, res) => {
 })
 
 app.post('/feed', (req, res) => {
-  issue.find({ email: req.body.email, status: {$ne: "Completed"} }, function (err, issues) {
-    issue.find({ type: "Community", status: {$ne: "Completed"} }, function (err, communityIssues) {
+  issue.find({ email: req.body.email, status: { $ne: "Completed" } }, function (err, issues) {
+    issue.find({ type: "Community", status: { $ne: "Completed" } }, function (err, communityIssues) {
       res.send({
         myIssues: issues,
         comIssues: communityIssues
@@ -395,6 +416,30 @@ app.post('/admin', (req, res) => {
     res.json({});
   }
 });
+
+
+app.post('/dashboard3', (req, res) => {
+  issue.count({ tstart: { $gt: new Date(req.body.date2), $lte: new Date(req.body.date1) } }, function (err, data1) {
+    issue.count({ tend: { $gt: new Date(req.body.date2), $lte: new Date(req.body.date1) } }, function (err, data2) {
+      freelancer.count({ tstart: { $gt: new Date(req.body.date2), $lte: new Date(req.body.date1) } }, function (err, data3) {
+        customer.count({ tstart: { $gt: new Date(req.body.date2), $lte: new Date(req.body.date1) } }, function (err, data4) {
+          organization.count({ tstart: { $gt: new Date(req.body.date2), $lte: new Date(req.body.date1) } }, function (err, data5) {
+            rating.count({ tstart: { $gt: new Date(req.body.date2), $lte: new Date(req.body.date1) } }, function (err, data6) {
+              res.json({
+                num1: data1,
+                num2: data2,
+                num3: data3,
+                num4: data4,
+                num5: data5,
+                num6: data6
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+})
 
 app.post('/dashboard', (req, res) => {
   if (req.body.email === "admin@issueredressal") {
@@ -470,8 +515,6 @@ app.post('/Ombudsman', (req, res) => {
   }
 })
 
-
-
 app.post('/ombudTrack', (req, res) => {
   issue.findByIdAndUpdate(req.body.id, { status: req.body.newStatus }, (err) => {
     if (err) {
@@ -522,7 +565,6 @@ app.post('/myPosts',(req,res) => {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
-
 app.listen(port, () => {
   console.log(`server running on : "http://localhost:${port}"`);
-});
+})

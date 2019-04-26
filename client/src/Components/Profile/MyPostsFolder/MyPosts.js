@@ -28,7 +28,7 @@ class MyPosts extends Component{
           }).then(res => res.json())
             .then(data => {
               this.setState({
-                issues: data.myIssues.map((issue, index) => { return <CardXFeed header={issue.complaintName} profile={true} content={new Issue(issue)} parent={this} key={index} myIssues={true} setView={this.props.setView} storeData={this.props.storeData} />; }),
+                issues: data.myIssues.map((issue, index) => { return <CardXFeed header={issue.complaintName} content={new Issue(issue)} parent={this} key={index} myIssues={true} setView={this.props.setView} storeData={this.props.storeData} />; }),
               });
             }).then(() => {
               this.setState({ loading: false });
