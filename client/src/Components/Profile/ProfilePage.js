@@ -34,7 +34,7 @@ class ProfilePage extends Component{
           <Nav.Link eventKey="first">Details</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="second">Posts Posted</Nav.Link>
+          <Nav.Link eventKey="second">Issues Solved</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link eventKey="third">Change Password</Nav.Link>
